@@ -12,6 +12,7 @@ CREATE TABLE "users" (
   "username" varchar(20),
   "full_name" varchar(100),
   "email" varchar(100),
+  "channel_favorites" int,
   "channel_moderator" int,
   "channel_member" int,
   "post_history" int,
@@ -21,7 +22,7 @@ CREATE TABLE "users" (
   "mbr_following" int,
   "mbr_blocked" int,
   "admin" boolean
-);
+  );
 
 CREATE TABLE "posts" (
   "id" int PRIMARY KEY,
@@ -55,6 +56,8 @@ ALTER TABLE "comments" ADD CONSTRAINT "chain_comments" FOREIGN KEY ("chained_id"
 ALTER TABLE "posts" ADD CONSTRAINT "channel_posts" FOREIGN KEY ("channel_id") REFERENCES "channels" ("id");
 
 ALTER TABLE "users" ADD CONSTRAINT "channel_members" FOREIGN KEY ("channel_member") REFERENCES "channels" ("id");
+
+ALTER TABLE "users" ADD CONSTRAINT "channel_favorites" FOREIGN KEY ("channel_favorites") REFERENCES "channels" ("id");
 
 ALTER TABLE "users" ADD CONSTRAINT "channel_moderators" FOREIGN KEY ("channel_moderator") REFERENCES "channels" ("id");
 
