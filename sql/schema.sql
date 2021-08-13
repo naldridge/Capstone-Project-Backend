@@ -26,7 +26,9 @@ CREATE TABLE "posts" (
   "id" int PRIMARY KEY,
   "channel_id" int,
   "title" varchar(100),
-  "body" varchar(1000),
+  "text_content" varchar(1000),
+  "mm_content" varchar(100),
+  "link_content" varchar(100),
   "likes" int
 );
 
@@ -35,23 +37,21 @@ CREATE TABLE "comments" (
   "channel_id" int,
   "post_id" int,
   "chained_id" int,
-  "body" varchar(1000),
+  "text_content" varchar(1000),
+  "mm_content" varchar(100),
+  "link_content" varchar(100),
   "likes" int
 );
 
-ALTER TABLE "posts" ADD CONSTRAINT "user_posts" FOREIGN KEY ("id") REFERENCES "users" ("post_history");
+ALTER TABLE "users" ADD CONSTRAINT "user_posts" FOREIGN KEY ("post_history") REFERENCES "posts" ("id");
 
-ALTER TABLE "posts" ADD CONSTRAINT "post_likes" FOREIGN KEY ("likes") REFERENCES "users" ("id");
-
-ALTER TABLE "posts" ADD CONSTRAINT "channel_posts" FOREIGN KEY ("channel_id") REFERENCES "channels" ("id");
-
-ALTER TABLE "comments" ADD CONSTRAINT "user_comments" FOREIGN KEY ("id") REFERENCES "users" ("comment_history");
+ALTER TABLE "users" ADD CONSTRAINT "user_comments" FOREIGN KEY ("comment_history") REFERENCES "comments" ("id");
 
 ALTER TABLE "comments" ADD CONSTRAINT "post_comments" FOREIGN KEY ("post_id") REFERENCES "posts" ("id");
 
 ALTER TABLE "comments" ADD CONSTRAINT "chain_comments" FOREIGN KEY ("chained_id") REFERENCES "comments" ("id");
 
-ALTER TABLE "comments" ADD CONSTRAINT "comment_likes" FOREIGN KEY ("likes") REFERENCES "users" ("id");
+ALTER TABLE "posts" ADD CONSTRAINT "channel_posts" FOREIGN KEY ("channel_id") REFERENCES "channels" ("id");
 
 ALTER TABLE "users" ADD CONSTRAINT "channel_members" FOREIGN KEY ("channel_member") REFERENCES "channels" ("id");
 
@@ -61,6 +61,6 @@ ALTER TABLE "users" ADD CONSTRAINT "user_followers" FOREIGN KEY ("mbr_following"
 
 ALTER TABLE "users" ADD CONSTRAINT "user_blocked" FOREIGN KEY ("mbr_blocked") REFERENCES "users" ("id");
 
+ALTER TABLE "posts" ADD CONSTRAINT "post_likes" FOREIGN KEY ("likes") REFERENCES "users" ("id");
 
-
-
+ALTER TABLE "comments" ADD CONSTRAINT "comments_likes" FOREIGN KEY ("likes") REFERENCES "users" ("id");
