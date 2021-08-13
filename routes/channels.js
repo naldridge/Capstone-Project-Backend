@@ -30,4 +30,28 @@ router.get('/default', async (req, res) => {
     }
 })
 
+router.post('/add', async (req, res) => {
+    //name attribute to fields that will be posted
+    const { channel_name, channel_description, channel_default_channel, channel_protected } = req.body;
+
+    const slug = slugify(channel_name, {
+        replacement: '',
+        lower: true,
+        strict: true
+    });
+    
+    const newChannel = new ChannelModel(null, channel_name, slug, channel_description, channel_default_channel, channel_protected);
+
+    const response = await newChannel.addEntry();
+    res.sendStatus(200);
+})
+
+router.post('/delete', async (req, res) => {
+    const { id } = req.body;
+    const channelToDelete = new ChannelModel(id);
+
+    response = await channelToDelete.deleteEntry();
+    res.sendStatus(200);
+})
+
 module.exports = router;
