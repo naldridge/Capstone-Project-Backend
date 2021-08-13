@@ -29,7 +29,8 @@ CREATE TABLE "posts" (
   "mm_content" varchar(100),
   "link_content" varchar(100),
   "likes" int,
-  "user_id" int
+  "user_id" int, 
+  "time_stamp" timestamp
 );
 
 CREATE TABLE "comments" (
@@ -41,7 +42,8 @@ CREATE TABLE "comments" (
   "mm_content" varchar(100),
   "link_content" varchar(100),
   "likes" int,
-  "user_id" int
+  "user_id" int,
+  "time_stamp" timestamp
 );
 
 ALTER TABLE "comments" ADD CONSTRAINT "post_comments" FOREIGN KEY ("post_id") REFERENCES "posts" ("id");
