@@ -1,6 +1,7 @@
 CREATE TABLE "channels" (
   "id" int PRIMARY KEY,
   "name" varchar(200) NOT NULL,
+  "slug" varchar(200) UNIQUE,
   "description" varchar(500),
   "default_channel" boolean,
   "protected" boolean
