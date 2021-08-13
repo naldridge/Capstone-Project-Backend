@@ -1,14 +1,14 @@
 CREATE TABLE "channels" (
-  "id" int PRIMARY KEY,
+  "id" serial PRIMARY KEY,
   "name" varchar(200) NOT NULL,
   "slug" varchar(200) UNIQUE,
   "description" varchar(500),
-  "default_channel" boolean,
+  "default_channel" boolean DEFAULT FALSE,
   "protected" boolean
 );
 
 CREATE TABLE "users" (
-  "id" int PRIMARY KEY,
+  "id" serial PRIMARY KEY,
   "username" varchar(20),
   "full_name" varchar(100),
   "email" varchar(100),
@@ -25,7 +25,7 @@ CREATE TABLE "users" (
   );
 
 CREATE TABLE "posts" (
-  "id" int PRIMARY KEY,
+  "id" serial PRIMARY KEY,
   "channel_id" int,
   "title" varchar(100),
   "text_content" varchar(1000),
@@ -35,7 +35,7 @@ CREATE TABLE "posts" (
 );
 
 CREATE TABLE "comments" (
-  "id" int PRIMARY KEY,
+  "id" serial PRIMARY KEY,
   "channel_id" int,
   "post_id" int,
   "chained_id" int,
