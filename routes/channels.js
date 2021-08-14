@@ -50,7 +50,7 @@ router.post('/delete', async (req, res) => {
     const { id } = req.body;
     const channelToDelete = new ChannelModel(id);
 
-    response = await channelToDelete.deleteEntry();
+    const response = await channelToDelete.deleteEntry();
     res.sendStatus(200);
 })
 
