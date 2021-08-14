@@ -30,7 +30,8 @@ CREATE TABLE "posts" (
   "link_content" varchar(100),
   "likes" int,
   "user_id" int, 
-  "time_stamp" timestamp
+  "time_stamp" timestamp,
+  "blocked" boolean DEFAULT FALSE
 );
 
 CREATE TABLE "comments" (
@@ -43,7 +44,8 @@ CREATE TABLE "comments" (
   "link_content" varchar(100),
   "likes" int,
   "user_id" int,
-  "time_stamp" timestamp
+  "time_stamp" timestamp,
+  "blocked" boolean DEFAULT FALSE
 );
 
 ALTER TABLE "comments" ADD CONSTRAINT "post_comments" FOREIGN KEY ("post_id") REFERENCES "posts" ("id");
