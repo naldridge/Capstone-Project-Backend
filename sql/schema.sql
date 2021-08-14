@@ -15,9 +15,6 @@ CREATE TABLE "users" (
   "channel_favorites" int,
   "channel_moderator" int,
   "channel_member" int,
-  "post_history" int,
-  "comment_history" int,
-  "event_history" int,
   "date_created" date,
   "mbr_following" int,
   "mbr_blocked" int,
@@ -31,7 +28,10 @@ CREATE TABLE "posts" (
   "text_content" varchar(1000),
   "mm_content" varchar(100),
   "link_content" varchar(100),
-  "likes" int
+  "likes" int,
+  "user_id" int, 
+  "time_stamp" timestamp,
+  "blocked" boolean DEFAULT FALSE
 );
 
 CREATE TABLE "comments" (
@@ -42,12 +42,11 @@ CREATE TABLE "comments" (
   "text_content" varchar(1000),
   "mm_content" varchar(100),
   "link_content" varchar(100),
-  "likes" int
+  "likes" int,
+  "user_id" int,
+  "time_stamp" timestamp,
+  "blocked" boolean DEFAULT FALSE
 );
-
-ALTER TABLE "users" ADD CONSTRAINT "user_posts" FOREIGN KEY ("post_history") REFERENCES "posts" ("id");
-
-ALTER TABLE "users" ADD CONSTRAINT "user_comments" FOREIGN KEY ("comment_history") REFERENCES "comments" ("id");
 
 ALTER TABLE "comments" ADD CONSTRAINT "post_comments" FOREIGN KEY ("post_id") REFERENCES "posts" ("id");
 
@@ -68,3 +67,7 @@ ALTER TABLE "users" ADD CONSTRAINT "user_blocked" FOREIGN KEY ("mbr_blocked") RE
 ALTER TABLE "posts" ADD CONSTRAINT "post_likes" FOREIGN KEY ("likes") REFERENCES "users" ("id");
 
 ALTER TABLE "comments" ADD CONSTRAINT "comments_likes" FOREIGN KEY ("likes") REFERENCES "users" ("id");
+
+ALTER TABLE "posts" ADD CONSTRAINT "user_posts" FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+
+ALTER TABLE "comments" ADD CONSTRAINT "user_comments" FOREIGN KEY ("user_id") REFERENCES "users" ("id");
