@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const slugify = require('slugify');
 const ChannelModel = require('../models/ChannelModel');
+const PostModel = require('../models/PostModel');
 
 router.get('/:slug?', async (req, res) => {
     if (req.params.slug) {
@@ -30,7 +31,7 @@ router.get('/default', async (req, res) => {
     }
 })
 
-router.post('/add', async (req, res) => {
+router.post('/add_channel', async (req, res) => {
     //name attribute to fields that will be posted
     const { channel_name, channel_description, channel_default_channel, channel_protected } = req.body;
 
@@ -46,11 +47,19 @@ router.post('/add', async (req, res) => {
     res.sendStatus(200);
 })
 
-router.post('/delete', async (req, res) => {
+router.post('/delete_channel', async (req, res) => {
     const { id } = req.body;
     const channelToDelete = new ChannelModel(id);
 
     const response = await channelToDelete.deleteEntry();
+    res.sendStatus(200);
+})
+
+router.post('/add_post', async (req, res) => {
+    const { channel_id, title, text_content, mm_content, link_content, user_id } = req.body;
+
+    const newPost = new PostModel(null, channel_id, title, text_content, mm_content, link_content, user_id);
+    const response = await newPost.addEntry();
     res.sendStatus(200);
 })
 

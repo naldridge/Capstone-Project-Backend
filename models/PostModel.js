@@ -54,3 +54,5 @@ class PostModel {
         }
     }
 }
+
+module.exports = PostModel;
