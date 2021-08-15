@@ -2,10 +2,12 @@
 
 const db = require('./conn');
 
-class PostModel {
-    constructor(id, channel_id, title, text_content, mm_content, link_content, likes, user_id, time_stamp, blocked) {
+class CommentModel {
+    constructor(id, channel_id, post_id, chained_id, text_content, mm_content, link_content, likes, user_id, time_stamp, blocked) {
         this.id = id;
         this.channel_id = channel_id;
+        this.post_id = post_id;
+        this.chained_id = chained_id;
         this.title = title;
         this.text_content = text_content;
         this.mm_content = mm_content;
@@ -19,7 +21,7 @@ class PostModel {
     static async getByUser(user_id) {
         try {
             const response = await db.any(
-                `SELECT * FROM posts
+                `SELECT * FROM comments
                 WHERE user_id = '${user_id}';`
             );
             return response;
@@ -29,11 +31,11 @@ class PostModel {
         }
     }
 
-    static async getByChannel(channel_id) {
+    static async getByPost(post_id) {
         try {
             const response = await db.any(
-                `SELECT * FROM posts
-                WHERE channel_id = '${channel_id}';`
+                `SELECT * FROM comments
+                WHERE post_id = '${post_id}';`
             );
             return response;
         } catch (err) {
@@ -45,9 +47,9 @@ class PostModel {
     async addEntry() {
         try {
             const response = await db.result(
-                `INSERT INTO posts (channel_id, title, text_content, mm_content, link_content, user_id)
+                `INSERT INOT comments (channel_id, post_id, chained_id, text_content, mm_content, link_content, user_id)
                 VALUES
-                    ('${this.channel_id}', '${this.title}', '${this.text_content}', '${this.mm_content}', '${this.link_content}', '${this.user_id}', );`
+                    ('${this.channel_id}', '${this.post_id}', '${this.chained_id}',  '${this.text_content}', '${this.mm_content}', '${this.link_content}', '${this.user_id}', );`
             );
             return response;
         } catch (err) {
@@ -57,4 +59,4 @@ class PostModel {
     }
 }
 
-module.exports = PostModel;
+module.exports = CommentModel;
