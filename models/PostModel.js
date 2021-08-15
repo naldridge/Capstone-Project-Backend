@@ -3,7 +3,7 @@
 const db = require('./conn');
 
 class PostModel {
-    constructor(id, channel_id, title, text_content, mm_content, link_content, likes, user_id) {
+    constructor(id, channel_id, title, text_content, mm_content, link_content, likes, user_id, timestamp, blocked) {
         this.id = id;
         this.channel_id = channel_id;
         this.title = title;
@@ -12,6 +12,8 @@ class PostModel {
         this.link_content = link_content;
         this.likes = likes;
         this.user_id = user_id;
+        this.timestamp = timestamp;
+        this.blocked = blocked;
     }
 
     static async getByUser(user_id) {
@@ -43,9 +45,9 @@ class PostModel {
     async addEntry() {
         try {
             const response = await db.result(
-                `INSERT INOT posts (channel_id, title, text_content, mm_content, link_content, user_id)
+                `INSERT INOT posts (channel_id, title, text_content, mm_content, link_content, user_id, timestamp)
                 VALUES
-                    ('${this.channel_id}', '${this.title}', '${this.text_content}', '${this.mm_content}', '${this.link_content}', '${this.user_id}');`
+                    ('${this.channel_id}', '${this.title}', '${this.text_content}', '${this.mm_content}', '${this.link_content}', '${this.user_id}', );`
             );
             return response;
         } catch (err) {

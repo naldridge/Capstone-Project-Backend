@@ -4,7 +4,6 @@ const express = require('express');
 const router = express.Router();
 const slugify = require('slugify');
 const ChannelModel = require('../models/ChannelModel');
-const PostModel = require('../models/PostModel');
 
 router.get('/:slug?', async (req, res) => {
     if (req.params.slug) {
@@ -17,7 +16,7 @@ router.get('/:slug?', async (req, res) => {
             res.status(400).send(`No channel found that matches the description, ${slug}.`);
         }
     } else {
-       res.redirect('/') 
+       res.redirect('/'); 
     }
 })
 
@@ -55,12 +54,6 @@ router.post('/delete_channel', async (req, res) => {
     res.sendStatus(200);
 })
 
-router.post('/add_post', async (req, res) => {
-    const { channel_id, title, text_content, mm_content, link_content, user_id } = req.body;
 
-    const newPost = new PostModel(null, channel_id, title, text_content, mm_content, link_content, user_id);
-    const response = await newPost.addEntry();
-    res.sendStatus(200);
-})
 
 module.exports = router;
