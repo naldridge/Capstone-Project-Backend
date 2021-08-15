@@ -30,7 +30,7 @@ CREATE TABLE "posts" (
   "link_content" varchar(100),
   "likes" int,
   "user_id" int, 
-  "time_stamp" timestamp,
+  "time_stamp" timestamp DEFAULT NOW(),
   "blocked" boolean DEFAULT FALSE
 );
 
@@ -44,7 +44,7 @@ CREATE TABLE "comments" (
   "link_content" varchar(100),
   "likes" int,
   "user_id" int,
-  "time_stamp" timestamp,
+  "time_stamp" timestamp DEFAULT NOW(),
   "blocked" boolean DEFAULT FALSE
 );
 
