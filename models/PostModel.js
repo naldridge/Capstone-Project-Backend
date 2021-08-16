@@ -47,7 +47,7 @@ class PostModel {
             const response = await db.result(
                 `INSERT INTO posts (channel_id, title, text_content, mm_content, link_content, user_id)
                 VALUES
-                    ('${this.channel_id}', '${this.title}', '${this.text_content}', '${this.mm_content}', '${this.link_content}', '${this.user_id}', );`
+                    ('${this.channel_id}', '${this.title}', '${this.text_content}', '${this.mm_content}', '${this.link_content}', '${this.user_id}');`
             );
             return response;
         } catch (err) {
