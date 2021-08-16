@@ -24,9 +24,13 @@ server.listen(port, hostname, () => {
 const rootController = require('./routes/index');
 const userController = require('./routes/users');
 const channelController = require('./routes/channels');
+const postController = require('./routes/posts');
+const commentController = require('./routes/comments');
 
 app.use('/', rootController);
 app.use('/user', userController);
 app.use('/channel', channelController);
+app.use('/post', postController);
+app.use('/comment', commentController);
 
 
