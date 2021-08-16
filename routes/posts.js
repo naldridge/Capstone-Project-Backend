@@ -36,3 +36,5 @@ router.post('/add', async (req, res) => {
     const response = await newPost.addEntry();
     res.sendStatus(200);
 })
+
+module.exports = router;

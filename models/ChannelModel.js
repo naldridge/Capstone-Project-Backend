@@ -50,6 +50,32 @@ class ChannelModel {
         }
     }
 
+    static async getChannelMbr(channel_id) {
+        try {
+            const response = await db.any(
+                `SELECT username FROM users
+                WHERE channel_member LIKE '%${channel_id}%'`
+            );
+                return response;
+        } catch (err) {
+            console.error('Error: ', err);
+            return err;
+        }
+    }
+
+    static async getChannelMod(channel_id) {
+        try {
+            const response = await db.any(
+                `SELECT username FROM users
+                WHERE channel_moderator LIKE '%${channel_id}%'`
+            );
+                return response;
+        } catch (err) {
+            console.error('Error: ', err);
+            return err;
+        }
+    }
+
     async addEntry() {
         try {
             const response = await db.result(
