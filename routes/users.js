@@ -13,9 +13,9 @@ router.get('/:username?', async (req, res) => {
             res.json(user).status(200);
         } else {
             res.status(400).send(`No user by the username, ${username}.`);
-        } else {
-            res.redirect('/');
-        }
+        } 
+    } else {
+        res.redirect('/');
     }
 })
 
