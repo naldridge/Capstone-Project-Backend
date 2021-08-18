@@ -79,9 +79,10 @@ class ChannelModel {
     async addEntry() {
         try {
             const response = await db.result(
-                `INSERT INTO channels (name, slug, description, default_channel, protected)
+                `INSERT INTO channels (name, slug, description)
                 VALUES
-                    ('${this.name}', '${this.slug}', '${this.description}', '${this.default_channel}', '${this.protected}');`
+                    ('${this.name}', '${this.slug}', '${this.description}')
+                    RETURNING id;`
             );
             return response;
         } catch (err) {
