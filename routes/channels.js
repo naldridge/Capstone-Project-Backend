@@ -32,7 +32,7 @@ router.get('/default', async (req, res) => {
 
 router.post('/add_channel', async (req, res) => {
     //name attribute to fields that will be posted
-    const { channel_name, channel_description } = req.body;
+    const { channel_name, description } = req.body;
 
     const slug = slugify(channel_name, {
         replacement: '',
@@ -40,7 +40,7 @@ router.post('/add_channel', async (req, res) => {
         strict: true
     });
     
-    const newChannel = new ChannelModel(null, channel_name, slug, channel_description);
+    const newChannel = new ChannelModel(null, channel_name, slug, description);
 
     const response = await newChannel.addEntry();
     res.status(200).json(response);
