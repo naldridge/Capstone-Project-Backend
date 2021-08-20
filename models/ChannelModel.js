@@ -3,13 +3,12 @@
 const db = require('./conn');
 
 class ChannelModel {
-    constructor(id, channel_name, slug, description, default_channel, protected) {
+    constructor(id, channel_name, slug, description, default_channel) {
         this.id = id;
         this.channel_name = channel_name;
         this.slug = slug;
         this.description = description;
         this.default_channel = default_channel;
-        this.protected = protected;
     }
 
     static async getAll() {

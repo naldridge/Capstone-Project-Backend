@@ -15,7 +15,7 @@ CREATE TABLE "users" (
   "channel_favorites" int,
   "channel_moderator" int,
   "channel_member" int,
-  "date_created" date,
+  "date_created" timestamp DEFAULT NOW(),
   "mbr_following" int,
   "mbr_blocked" int,
   "admin" boolean
