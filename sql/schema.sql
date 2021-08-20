@@ -52,6 +52,8 @@ ALTER TABLE "comments" ADD CONSTRAINT "post_comments" FOREIGN KEY ("post_id") RE
 
 ALTER TABLE "comments" ADD CONSTRAINT "chain_comments" FOREIGN KEY ("chained_id") REFERENCES "comments" ("id");
 
+ALTER TABLE "comments" ADD CONSTRAINT "channel_comments" FOREIGN KEY ("channel_id") REFERENCES "channels" ("id");
+
 ALTER TABLE "posts" ADD CONSTRAINT "channel_posts" FOREIGN KEY ("channel_id") REFERENCES "channels" ("id");
 
 ALTER TABLE "users" ADD CONSTRAINT "channel_members" FOREIGN KEY ("channel_member") REFERENCES "channels" ("id");
