@@ -17,6 +17,19 @@ class UserModel {
         this.admin = admin;
     }
 
+    static async getByUserId(user_id) {
+        try {
+            const response = await db.any(
+                `SELECT * FROM users
+                WHERE id = '${user_id}';`
+            );
+            return response;
+        } catch (err) {
+            console.error('Error: ', err);
+            return err;
+        }
+    }
+
     static async getByUsername(username) {
         try {
             const response = await db.any(

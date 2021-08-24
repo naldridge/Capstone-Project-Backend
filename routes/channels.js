@@ -5,6 +5,17 @@ const router = express.Router();
 const slugify = require('slugify');
 const ChannelModel = require('../models/ChannelModel');
 
+router.get('/', async (req, res) => {
+    const channel = await ChannelModel.getAll();
+
+    if (channel) {
+        res.json(channel).status(200);
+    } else {
+        res.status(400).send(`No channel found that matches the description, default.`);
+    }
+
+})
+
 router.get('/default', async (req, res) => {
     const channel = await ChannelModel.getbyDefaultChannel();
 

@@ -4,13 +4,13 @@ const express = require('express');
 const router = express.Router();
 const CommentModel = require('../models/CommentModel');
 
-router.get('/show_comments', async (req, res) => {
-    if (req.body.post_id) {
-        const { post_id } = req.body;
+router.get('/show_comments/:post_id?', async (req, res) => {
+    if (req.params.post_id) {
+        const { post_id } = req.params;
         const comment = await CommentModel.getByPost(post_id);
 
         if (comment) {
-            res.json(comment).sendStatus(200);
+            res.json(comment);
         } else {
             res.sendStatus(400).send('No comments on this post yet.');
         }

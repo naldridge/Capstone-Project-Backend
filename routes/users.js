@@ -4,6 +4,21 @@ const express = require('express');
 const router = express.Router();
 const UserModel = require('../models/UserModel');
 
+router.get('/:user_id?', async (req, res) => {
+    if (req.params.user_id) {
+        const { user_id } = req.params;
+        const user = await UserModel.getByUserId(user_id);
+
+        if (user) {
+            res.json(user);
+        } else {
+            res.status(400).send(`No user by the id, ${user_id}.`);
+        } 
+    } else {
+        res.redirect('/');
+    }
+})
+
 router.get('/:username?', async (req, res) => {
     if (req.params.username) {
         const { username } = req.params;
