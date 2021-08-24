@@ -1,2 +1,3 @@
 # Capstone-Project-Backend
-![fetch_dev](https://user-images.githubusercontent.com/83563864/130518266-bbc0f680-eb72-4c9d-a9fd-ca5696ef7166.PNG)
+<img width="1434" alt="Screen Shot 2021-08-23 at 4 04 06 PM" src="https://user-images.githubusercontent.com/83563864/130657691-aad1ed25-46b5-4ea4-a458-92c9c17ff2a8.png">
+
